@@ -14,6 +14,7 @@ app.post('/newPost', (req, res) => {
   const obj = req.body
   const data = JSON.stringify(obj);
   fs.writeFileSync('news.json', data)
+  res.send(200);
 })
 
 const port = process.argv[2] || 3000;
