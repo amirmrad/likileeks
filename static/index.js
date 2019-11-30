@@ -9,14 +9,6 @@ class NewsItem{
     }
 }
 
-function upVoteFunction(upVoteButton){
-   const id = upVoteButton.parentElement.getAttribute('data-id');
-   fetch(`/upVote?id=${id}`);
-}
-function downVoteFunction(newsItem){
-   fetch(`/downVote?id=${newsItem.id}`);
-}
-
 function makeid(length) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
