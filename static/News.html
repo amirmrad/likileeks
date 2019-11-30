@@ -6,26 +6,36 @@
           <meta http-equiv="X-UA-Compatible" content="ie+edge" />
           <link rel= "stylesheet" href= "https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" >
           <link rel= "stylesheet" href= "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+          <link rel= "stylesheet" href= "./style.css">
           <title>NewsPage</title>
      </head>
      <body>
-          <div class= "row">
-                    <div class="col-md-7">
-                         <div class="single-blog" style="height: 500px" ,"width: 800px">
-                              <h2 id="title">News Title</h2>
-                              <div class="imgNews" style="height:200px;">Image</div>
-                              <p id= "description">description</p>
-                              <p id= "author">Author</p>
-                              <p>  
-                                   <img src="https://img.icons8.com/ios/50/000000/thumb-up.png">
-                                   <button type="button"> UpVote</button>
-                                   <img src="https://img.icons8.com/ios/50/000000/thumbs-down.png">
-                                   <button type="button"> DownVote</button>
-                                   <a href="#" class= "read-more-btn"> Read more</a>
-                              </p>
-                         </div>
+          <div class= "row" id = "cardContainer">
+               <div class="column">
+                    <div class="single-blog">
+                         <h2 id="title">%%title%%</h2>
+                         <div class="imgNews" style="height:200px;">Image</div>
+                         <p id= "description">%%description%%</p>
+                         <p id= "author">%%author%%</p>
+                         <p class= "btn">  
+                              <img src="https://img.icons8.com/ios/40/000000/thumb-up.png">
+                              <button type="button"> UpVote</button>
+                              <img src="https://img.icons8.com/ios/40/000000/thumbs-down.png">
+                              <button type="button"> DownVote</button>
+                              <a href="#" class= "read-more-btn"> Read more about title</a>
+                         </p>
                     </div>
+               </div>
           </div>
+          <script>
+               function makePost(newTitle, newDescription, newAuthor){
+                    const innerDiv = document.querySelector(".column");
+                    const outerDiv = document.createElement('div')
+                    outerDiv.setAttribute('class', 'column')
+                    const htmlString = innerDiv.innerHTML.replace('%%title%%', newTitle).replace('%%description%%', newDescription).replace('%%author%%', newAuthor)
+                    outerDiv.innerHTML = htmlString
+                    document.getElementById('cardContainer').appendChild(outerDiv);
+               }
+          </script>
      </body>
-
 </html>
