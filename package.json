@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/ahmr88/likileeks/issues"
   },
-  "homepage": "https://github.com/ahmr88/likileeks#readme"
+  "homepage": "https://github.com/ahmr88/likileeks#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
