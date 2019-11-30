@@ -8,6 +8,15 @@ class NewsItem{
         this.id = id;
     }
 }
+
+function upVoteFunction(upVoteButton){
+   const id = upVoteButton.parentElement.getAttribute('data-id');
+   fetch(`/upVote?id=${id}`);
+}
+function downVoteFunction(newsItem){
+   fetch(`/downVote?id=${newsItem.id}`);
+}
+
 function makeid(length) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -59,6 +68,7 @@ function displayNewsItems(newsArray){
   
 //Event: add a post
 document.querySelector('#post-form').addEventListener('submit',(e)=>{
+
     //prevent actual submit
     e.preventDefault();
     // Get form values
@@ -66,6 +76,9 @@ document.querySelector('#post-form').addEventListener('submit',(e)=>{
     const author = document.querySelector('#author').value;
     const description = document.querySelector('#description').value;
     const id = makeid(15);
+
+    card = document.querySelector('.card');
+    card.setAttribute('data-id',id);
 
     //validate 
     if(title === '' || author ==='' || description === ''){
