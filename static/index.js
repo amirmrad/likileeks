@@ -19,7 +19,7 @@ function makeid(length) {
  }
  async function postData(url = '', data = {}) {
     // Default options are marked with *
-    const response = await fetch(url, {
+    await fetch(url, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -31,8 +31,8 @@ function makeid(length) {
       redirect: 'follow', // manual, *follow, error
       referrer: 'no-referrer', // no-referrer, *client
       body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });
-    return await response.json(); // parses JSON response into native JavaScript objects
+    })
+
   }
 
 //Event: add a book
@@ -57,6 +57,27 @@ document.querySelector('#post-form').addEventListener('submit',(e)=>{
         //instantiate book
         const newsItem = new NewsItem(title,author,description,id);
         postData('/newPost',newsItem);
+
+        //add it to ui
+        const postContainer = document.querySelector(".postsContainer");
+        const post = document.createElement('p');
+        titleText = document.createTextNode(title);
+        descText = document.createTextNode(description);
+        authorText = document.createTextNode(author);
+        linebreak = document.createElement("br");
+        postContainer.appendChild(titleText);
+        postContainer.appendChild(linebreak);
+        
+        postContainer.appendChild(descText);
+        postContainer.appendChild(linebreak);
+        postContainer.appendChild(authorText);
+        postContainer.appendChild(linebreak);
+        postContainer.appendChild(linebreak);
+        postContainer.appendChild(linebreak);
+
+        //postContainer.appendChild(post);
+        // postContainer.appendChild(author);
+        // postContainer.appendChild(description);
     }
 
 });
