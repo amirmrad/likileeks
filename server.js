@@ -6,6 +6,7 @@ const fs = require('fs');
 const posts = [];
 const users = [];
 
+
 const app = express();
 
 app.use(express.json());
@@ -46,6 +47,19 @@ app.post('/newPost', (req, res) => {
   posts.push(obj);
   res.send(200);
   console.log(posts)
+})
+
+app.get('/users', (req, res) => {
+    res.json(users)
+})
+
+app.post('/newUser', (req, res) => {
+    const obj = req.body
+    posts.push(obj);
+    console.log(users);
+    // const data = JSON.stringify(obj);
+    // fs.writeFileSync('news.json', data)
+    res.send(200);
 })
 
 const port = process.argv[2] || 3000;
