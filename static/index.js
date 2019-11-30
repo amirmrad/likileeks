@@ -17,9 +17,10 @@ function makeid(length) {
     }
     return result;
  }
+
  async function postData(url = '', data = {}) {
     // Default options are marked with *
-    const response = await fetch(url, {
+    await fetch(url, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
@@ -31,32 +32,52 @@ function makeid(length) {
       redirect: 'follow', // manual, *follow, error
       referrer: 'no-referrer', // no-referrer, *client
       body: JSON.stringify(data) // body data type must match "Content-Type" header
-    });
-    return await response.json(); // parses JSON response into native JavaScript objects
+    })
   }
 
-//Event: add a book
+  document.addEventListener('DOMContentLoaded',getNewsItems())
+  
+  function getNewsItems(){
+    fetch('/posts').then(res => res.json()).then(r => displayNewsItems(r));
+  }
+
+
+
+function displayNewsItems(newsArray){
+    const postContainer = document.querySelector(".postsContainer");
+    newsArray.forEach(element => {
+    titleText = document.createTextNode(element.title);
+    descText = document.createTextNode(element.description);
+    authorText = document.createTextNode(element.author);
+    linebreak = document.createElement('br');
+    postContainer.appendChild(titleText);
+    postContainer.appendChild(descText);
+    postContainer.appendChild(authorText);
+    });
+    
+}
+  
+//Event: add a post
 document.querySelector('#post-form').addEventListener('submit',(e)=>{
     //prevent actual submit
     e.preventDefault();
     // Get form values
     const title = document.querySelector('#title').value;
-    console.log(title);
     const author = document.querySelector('#author').value;
-    console.log(author);
     const description = document.querySelector('#description').value;
-    console.log(description);
     const id = makeid(15);
-    console.log(id);
 
     //validate 
     if(title === '' || author ==='' || description === ''){
-        UI.showAlert('Please fill in all the blanks','danger');
+        alert('Please fill in all the blanks');
     }
     else{
         //instantiate book
         const newsItem = new NewsItem(title,author,description,id);
+        //give data to backend
         postData('/newPost',newsItem);
+        //add it to ui by getting it from backend again
+        getNewsItems();
     }
 
 });
