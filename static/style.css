@@ -8,14 +8,7 @@
     border-width: 2px;
 
 }
-#topNavBar {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
-  }
-#sidebar{
+/* #sidebar{
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -25,7 +18,7 @@
   position: fixed; /* Make it stick, even on scroll */
   overflow: auto; /* Enable scrolling if the sidenav has too much content */
 }
-  
+   */
   #top {
     float: left;
   }
@@ -52,6 +45,20 @@
     width: 100%;
     border: 1px solid #e7e7e7;
     background-color: #f3f3f3;
+  }
+
+  #container {
+    padding-left: 300px;
+  }
+  
+  #content {
+    padding: 20px;
+  }
+  
+  @media only screen and (max-width : 992px) {
+    #container {
+      padding-left: 0px;
+    }
   }
 
   
