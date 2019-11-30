@@ -1,0 +1,57 @@
+.main{
+    margin-top: 30px;
+    margin-left:120px;
+    position: fixed;
+    background-color: green;
+    border-style: dashed;
+    border: #111;
+    border-width: 2px;
+
+}
+#topNavBar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+#sidebar{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 25%;
+  background-color: red;
+  height: 100%; /* Full height */
+  position: fixed; /* Make it stick, even on scroll */
+  overflow: auto; /* Enable scrolling if the sidenav has too much content */
+}
+  
+  #top {
+    float: left;
+  }
+  
+  #top a {
+    display: block;
+    color: #666;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  /* Change the link color to #111 (black) on hover */
+  #top a:hover {
+    background-color: #111;
+  }
+  .active {
+    background-color: #4CAF50;
+  }
+  #topNavBar {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    width: 100%;
+    border: 1px solid #e7e7e7;
+    background-color: #f3f3f3;
+  }
+
+  
