@@ -1,10 +1,9 @@
 
 // Book class represents a book
 class UserItem{
-    constructor(name,surname,email,password){
+    constructor(username,name,password){
+        this.username = username;
         this.name = name;
-        this.surname = surname;
-        this.email = email;
         this.password = password;
     }
 }
@@ -31,21 +30,19 @@ document.querySelector('#user-form').addEventListener('submit',(e)=>{
     //prevent actual submit
     e.preventDefault();
     // Get form values
+    const username = document.querySelector('#username').value;
     const name = document.querySelector('#name').value;
-    const surname = document.querySelector('#surname').value;
-    const email = document.querySelector('#email').value;
     const password = document.querySelector('#password').value;
 
     //validate
-    if(name === '' || surname ==='' || email === '' || password === ''){
+    if(username === '' || name ==='' || password === ''){
         alert('Please fill in all the blanks');
     }
     else{
         //instantiate book
-        const userItem = new UserItem(name,surname,email,password);
+        const userItem = new UserItem(username,name,password);
         console.log(userItem);
         //give data to backend
-        makeUser('/newUser',userItem);
+        makeUser('/user/createUser',userItem);
     }
-
 });
