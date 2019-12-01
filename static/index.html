@@ -6,20 +6,92 @@
     <meta http-equiv="X-UA-Compatible" content="ie+edge" />
     <title>LikiLeeks</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <link type="text/css" href="/style.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link type="text/css" href="/style.css" rel="stylesheet" />
+
     </head>
   <body>
+      <nav>
+          <div class="nav-wrapper indigo darken-4">
+            <a href="#" class="brand-logo center">Logo</a>
+            <ul>
+                <li>
+                <form>
+                    <div class="input-field">
+                      <input id="search" type="search" required>
+                      <label class="label-icon" for="search"><i class="material-icons">search</i></label>
+                      <i class="material-icons">close</i>
+                    </div>
+                  </form>
+                  </li>
+                <il>
+                    <a id='menuItem'class='dropdown-trigger btn indigo accent-1' href='#' data-target='dropdown1'>Menu</a>
+                </il>
+            </ul>
+            
+                  
+      <!-- Dropdown Trigger -->
+      
+      <ul id='dropdown1' class='dropdown-content indigo darken-4'>
+          <li><a href="#!"><i class="material-icons" style="color:#8c9eff;">home</i><p style="color:rgb(255, 255, 255);">Home</p></a></li>
+          <li class="divider" tabindex="-1"></li>
+          <li><a href="#!"><i class="material-icons"style="color:#8c9eff;">view_module</i><p style="color:rgb(255, 255, 255);">News</p> </a></li>
+          <li class="divider" tabindex="-1"></li>
+          <li><a href="#!"><i class="material-icons"style="color:#8c9eff";>phone_iphone</i><p style="color:rgb(255, 255, 255);">Contact</p></a></li><li class="divider" tabindex="-1"></li>
+          <li><a href="#!"><i class="material-icons"style="color:#8c9eff;">cloud</i><p style="color:rgb(255, 255, 255);">About</p></a></li>
+        </ul>
+          </div>
+        </nav>
 
-      <!-- <ul id = "topNavBar">
-          <li id = "top"><a href="default.asp">Home</a></li>
-          <li id = "top"><a href="news.asp">News</a></li>
-          <li id = "top"><a href="contact.asp">Contact</a></li>
-          <li id = "top"><a href="about.asp">About</a></li>
-        </ul> -->
-    <div class="main">
+
+
+  <div class="row">
+      <div class="col s12 m6 offset-m3 ">
+        <div id='card' class="card-panel teal5 indigo accent-1">
+          <span>
+              <div id='centerContainer' class="row">
+                  <div class="inputContainer">
+                    <form class="col s12" id="post-form">
+                      <div class="row">
+                        <div id='title' class="input-field col s6">
+                            <i class="material-icons prefix" style="color:#1a237e;">title</i>
+                          <input id="post_title" type="text" class="validate">
+                          <label for="post_title">Tags</label>
+                        </div>
+                        <div class="input-field col s6">
+                            <i class="material-icons prefix" style="color:#1a237e;">account_circle</i>
+                            <input id="last_name" type="text" class="validate">
+                            <label for="last_name" data-error="Please enter your first name.">Author Name</label>
+                          </div>
+                      </div>
+                      </div>
+                      <!--new Row for the new description-->
+                      <div class="row">
+                          <div class="input-field col s12">
+                              <i class="material-icons prefix" style="color:#1a237e;">create</i>
+                              <input id="news_text" type="text" class="validate">
+                              <label for="news_text">Description</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <button id ='submitButton' class="btn waves-effect indigo darken-4" type="submit" name="action">Submit
+                                <i class="material-icons right indigo darken-4">send</i>
+                              </button>    
+                        </div>
+                    </form>
+                  </div>
+          </span>
+        </div>
+      </div>
+    </div>
+          <div class="postsContainer">
+
+            </div>
+      </div>
+
+    <!-- <div class="main">
         <form id="post-form">
             <div class="form-group">
                 <label for="title">Title</label>
@@ -43,27 +115,7 @@
           </p>
         </div>
       </div>
-    </div>
-    <ul id = "sideBard">
-        <li id = "side"><a href="default.asp">HashTags</a></li>
-        <li id = "side"><a href="news.asp">Profile</a></li>
-        <li id = "side"><a href="contact.asp">idk</a></li>
-        <li id = "side"><a href="about.asp">About</a></li>
-      </ul>
-
-
-
-  <!-- Dropdown Trigger -->
-  <a class='dropdown-trigger btn' href='#' data-target='dropdown1'>Drop Me!</a>
-
-  <!-- Dropdown Structure -->
-  <ul id='dropdown1' class='dropdown-content'>
-    <li><a href="#!"><i class="material-icons">home</i>Home</a></li>
-    <li><a href="#!"><i class="material-icons">view_module</i>News</a></li>
-    <li class="divider" tabindex="-1"></li>
-    <li><a href="#!">three</a></li>
-    <li><a href="#!"><i class="material-icons">cloud</i>five</a></li>
-  </ul>
+    </div> -->
 
 
        <!-- Compiled and minified JavaScript -->
