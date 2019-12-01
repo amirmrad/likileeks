@@ -13,15 +13,57 @@ router.get('/posts', (req, res) => {
 
 router.get('/downVote', (req, res) => {
   // update table
-  
-  res.send(200)
+  const id = req.query.id;
+mongo.connect(dburl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}, (err, client) => {
+  if (err) {
+    console.error(err)
+    return
+  }
+  const db = client.db('likileaks')
+  const userCol = db.collection('post')
+  userCol.update({id : id}, {$inc : {downVote : 1}}, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send(404);
+    } else {
+      if (result) {
+        res.json({message : "success"})
+        return
+      }
+      res.send(200)
+    }
+  })
+})
 })
 
-
 router.get('/upVote', (req, res) => {
-  // update table
-  
-  res.send(200)
+  const id = req.query.id;
+mongo.connect(dburl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}, (err, client) => {
+  if (err) {
+    console.error(err)
+    return
+  }
+  const db = client.db('likileaks')
+  const userCol = db.collection('post')
+  userCol.update({id : id}, {$inc : {upVote : 1}}, (err, result) => {
+    if (err) {
+      console.log(err);
+      res.send(404);
+    } else {
+      if (result) {
+        res.json({message : "success"})
+        return
+      }
+      res.send(200)
+    }
+  })
+})
 })
 
 router.post('/newPost', (req, res) => {
