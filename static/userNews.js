@@ -26,7 +26,7 @@ posts = [{
     id:3
 }]
 
-
+//add an event listener to pressing on user icon
 function getAllUserPosts(username){
     var news=[];
     for(x = 0;x<posts.length;x++){
