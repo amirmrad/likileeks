@@ -61,7 +61,7 @@
                       <div class="row">
                       </div>
                       </div>
-                    
+    
                       <!--new Row for the new description-->
                       <div class="row">
                           <div class="input-field col s12">
@@ -81,42 +81,47 @@
           </span>
         </div>
         <div class="postsContainer">
-            <div class='smallCard' class="col s12 m8 offset-m2 l6 offset-l3">
-                <div class="card-panel grey lighten-5 z-depth-1">
-                  <div class="row valign-wrapper">
-                    <div class="col s2">
-                      <img src="images/yuna.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
-                    </div>
-                    <div class="col s10">
-                      <span class="black-text"></span>
-                      </span>
-                      <div>
-                          <div class="single-blog">
-                              <p id="tags">Tag:</p>
-                              <div class="chip">
-                                  Tag
-                                  <i class="close material-icons">close</i>
-                                </div>
-                              <p id= "description">description</p>
-                              <div>  
-                                <i class="material-icons prefix" style="color:#1a237e;">account_circle</i><label id= "author">author</p>
-                                  <label for="author">Author Name </label> 
-                                </div>
-                              <div class= "btn indigo darken-4">  
-                                   <button id = 'down' type="button" class = "upvote indigo darken-4" onclick="upVoteFunction(this)"> UpVote</button>
-                                   <i class="material-icons right indigo darken-4">thumb_down</i>
-                                   <button id='up' type="button" class = "downVote indigo darken-4" onclick= "downVoteFunction(this)"> DownVote</button>
-                                   <i class="material-icons right indigo darken-4">thumb_up</i>
-                              </div>
-                         
-                      </div>
-                    </div>
-                  </div>
+
+                <div class="card-panel grey lighten-5 z-depth-1 smallCard col s12 m8 offset-m2 l6 offset-l3 post">
+
+                            <div class="row valign-wrapper" style= "min-width: 75vw;">
+                                    <div class="col s2">
+                                      <img src="images/yuna.jpg" alt="" class="circle responsive-img"> <!-- notice the "circle" class -->
+                                    </div>
+
+                                    <div class="col s10">
+                                      <span class="black-text"></span>
+                                     
+                                    <div>
+
+                                    <div class="single-blog">
+                                              <div id="tags">Tag:>
+                                            
+                                                  <div class="chip">
+                                                    Tag
+                                                    <i class="close material-icons">close</i>
+                                                  </div>
+                                              </div>
+                                                
+                                              <p id= "description">description</p>
+                                              
+                                              <div>  
+                                                  <i class="material-icons prefix" style="color:#1a237e;">account_circle</i><label id= "author">author</p>
+                                                  <label for="author">Author Name </label> 
+                                              </div>
+                                              <div class= "btn indigo darken-4">  
+                                                  
+                                                  <i class="material-icons right indigo darken-4" onclick="upVoteFunction(this)" >thumb_down</i>
+                                                  <i class="material-icons right indigo darken-4" onclick= "downVoteFunction(this)">thumb_up</i>
+                                              </div>
+                                    </div>
+                           </div>
+                             
+                        
                 </div>
-              </div>
-      </div>
-      </div>
         </div>
+      
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="mat.js"></script>

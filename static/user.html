@@ -97,37 +97,7 @@
 
     <div class="row" id="container2">
       <div class="postsContainer">
-        <div class="row" class="smallCard">
-          <div class="col s12 m5">
-            <div class="card-panel teal">
-              <span class="white-text"> </span>
-              <div>
-                <div class="single-blog">
-                  <h4 id="tags">#Tag</h4>
-                  <div class="newsImage" style="height:100px;">Image</div>
-                  <p id="description">description</p>
-                  <p id="author">author</p>
-                  <div class="btn">
-                    <button
-                      type="button"
-                      class="upvote indigo darken-4"
-                      onclick="upVoteFunction(this)"
-                    >
-                      UpVote
-                    </button>
-                    <button
-                      type="button"
-                      class="downVote indigo darken-4"
-                      onclick="downVoteFunction(this)"
-                    >
-                      DownVote
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+
       </div>
     </div>
 
@@ -150,53 +120,72 @@
       }
 
 
-      function makePost(tags, newDescription, newAuthor, id) {
-        const post = document.createElement("div");
-        const singleBlog = document.createElement("div");
-        const tagsHeader = document.createElement("h2");
-        const newsImage = document.createElement("div");
-        const description = document.createElement("p");
-        const author = document.createElement("p");
-        const btnHolder = document.createElement("div");
-        const upVoteButton = document.createElement("button");
-        const downVoteButton = document.createElement("button");
+function makePost(tags, newDescription, newAuthor,id){
+    const post = document.createElement('div');
+    post.setAttribute('class', 'card-panel grey lighten-5 z-depth-1 smallCard col s12 m8 offset-m2 l6 offset-l3 post');
+    post.setAttribute("data-id",id);
+        const lineWrapper = document.createElement('div');
+        lineWrapper.setAttribute('class','row valign-wrapper');
+            const div1 = document.createElement('div');
+                const image1 = document.createElement('img');
+                image1.setAttribute('class','circle responsive-img');
+                image1.setAttribute('src','images/yuna.jpg');
+                image1.setAttribute('alt',' ');
+               // div1.appendChild(image1);
 
-        post.setAttribute("class", "post");
-        post.setAttribute("data-id", id);
-        singleBlog.setAttribute("class", "single-blog");
 
-        tagsHeader.setAttribute("id", "title");
-        tagsHeader.innerHTML = "#" + tags;
+            const singleBlog = document.createElement('div');
+            singleBlog.setAttribute("class","single-blog");
 
-        newsImage.setAttribute("class", "newsImage");
-        newsImage.setAttribute("style", "height:200px;");
-        newsImage.innerHTML = "Image";
+                const tagsHeader = document.createElement('p');
+                tagsHeader.setAttribute('id', 'title');
+                for(x=0;x<tags.length;x++){
+                    const tag = document.createElement('a');
+                    tag.setAttribute("href","http://localhost:3000/");
+                    tag.innerHTML = "#" + tags[x];
+                    tagsHeader.appendChild(tag);
+                }
 
-        description.setAttribute("id", "description");
-        description.innerHTML = newDescription;
+                const description = document.createElement('p');
+                description.setAttribute('id', 'description');
+                description.innerHTML = newDescription;
 
-        author.setAttribute("id", "author");
-        author.innerHTML = newAuthor;
-        btnHolder.setAttribute("class", "btn");
+                const authordiv = document.createElement('div');
+                    const author = document.createElement('a');
+                    author.setAttribute('id', 'author');
+                    author.setAttribute("href",`http://localhost:3000/user.html?author=${newAuthor}`);
+                    author.innerHTML = newAuthor;
+                authordiv.appendChild(author)
 
-        upVoteButton.setAttribute("onclick", "upVoteFunction(this)");
-        upVoteButton.innerHTML = "Up Vote";
-        downVoteButton.innerHTML = "Down Vote";
-        downVoteButton.setAttribute("onclick", "downVoteFunction(this)");
+                const btnHolder = document.createElement('div');
+                btnHolder.setAttribute("class","btn indigo darken-4");
+                    const upVoteButton = document.createElement('i');
+                    const downVoteButton = document.createElement('i');
+                    upVoteButton.setAttribute("onclick","upVoteFunction(this)");
+                    upVoteButton.setAttribute("class","material-icons right indigo darken-4");
+                    upVoteButton.innerHTML = "thumb_up";
 
-        btnHolder.appendChild(upVoteButton);
-        btnHolder.appendChild(downVoteButton);
+                    
+                    downVoteButton.setAttribute("onclick","downVoteFunction(this)");
+                    downVoteButton.setAttribute("class","material-icons right indigo darken-4");
+                    downVoteButton.innerHTML = "thumb_down";
+                btnHolder.appendChild(upVoteButton);
+                btnHolder.appendChild(downVoteButton);
 
-        singleBlog.appendChild(tagsHeader);
-        singleBlog.appendChild(newsImage);
-        singleBlog.appendChild(description);
-        singleBlog.appendChild(author);
-        singleBlog.appendChild(btnHolder);
-        post.appendChild(singleBlog);
+            singleBlog.appendChild(tagsHeader);
+            singleBlog.appendChild(description);
+            singleBlog.appendChild(authordiv);
+            singleBlog.appendChild(btnHolder);
 
-        document.querySelector(".postsContainer").appendChild(post);
-        //console.log(tags);
-      }
+        lineWrapper.appendChild(div1);
+        lineWrapper.appendChild(singleBlog);
+
+    post.appendChild(lineWrapper);
+
+    document.querySelector(".postsContainer").appendChild(post);
+    //console.log(tags);
+    
+ }
       const urlParams = new URLSearchParams(window.location.search);
       const author = urlParams.get("author");
 
