@@ -6,9 +6,7 @@ dotenv.config();
 
 const dburl = process.env.DB_URL;
 
-
-
-router.get('/posts', (req, res) => {
+const con = (dburl, callback) => {
   mongo.connect(dburl, {
       useNewUrlParser: true,
       useUnifiedTopology: true
@@ -18,6 +16,12 @@ router.get('/posts', (req, res) => {
       return
     }
     const db = client.db('likileaks')
+    callback(db)
+  })
+}
+
+router.get('/posts', (req, res) => {
+  con(dburl, (db) => {
     const postCol = db.collection('post')
     postCol.find({}, {projection: {_id: 0}}).toArray((err, result) => {
       if (err) {
@@ -33,56 +37,40 @@ router.get('/posts', (req, res) => {
 router.get('/downVote', (req, res) => {
   // update table
   const id = req.query.id;
-mongo.connect(dburl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}, (err, client) => {
-  if (err) {
-    console.error(err)
-    return
-  }
-  const db = client.db('likileaks')
-  const userCol = db.collection('post')
-  userCol.update({id : id}, {$inc : {downVote : 1}}, (err, result) => {
-    if (err) {
-      console.log(err);
-      res.send(404);
-    } else {
-      if (result) {
-        res.json({message : "success"})
-        return
+  con(dburl, (db) => {
+    const userCol = db.collection('post')
+    userCol.update({id : id}, {$inc : {downVote : 1}}, (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send(404);
+      } else {
+        if (result) {
+          res.json({message : "success"})
+          return
+        }
+        res.send(200)
       }
-      res.send(200)
-    }
+    })
   })
-})
 })
 
 router.get('/upVote', (req, res) => {
   const id = req.query.id;
-mongo.connect(dburl, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-}, (err, client) => {
-  if (err) {
-    console.error(err)
-    return
-  }
-  const db = client.db('likileaks')
-  const userCol = db.collection('post')
-  userCol.update({id : id}, {$inc : {upVote : 1}}, (err, result) => {
-    if (err) {
-      console.log(err);
-      res.send(404);
-    } else {
-      if (result) {
-        res.json({message : "success"})
-        return
+  con(dburl, (db) => {
+    const userCol = db.collection('post')
+    userCol.update({id : id}, {$inc : {upVote : 1}}, (err, result) => {
+      if (err) {
+        console.log(err);
+        res.send(404);
+      } else {
+        if (result) {
+          res.json({message : "success"})
+          return
+        }
+        res.send(200)
       }
-      res.send(200)
-    }
+    })
   })
-})
 })
 
 router.post('/newPost', (req, res) => {
@@ -92,23 +80,22 @@ router.post('/newPost', (req, res) => {
   obj.tags = obj.description.split(/([.,!?:;'\"-]|\s)+/)
                               .filter(str => str.startsWith("#"))
                               .map(str => str.substring(1))
-  mongo.connect(dburl, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true
-    }, (err, client) => {
-    if (err) {
-      console.error(err)
-      return
-    }
-      const db = client.db('likileaks')
-      const userCol = db.collection('post')
-      userCol.insertOne(obj, (err, result) => {
-        if (err) {
-          console.log(err)
-        }
-      })
+  con(dburl, (db) => {
+    const userCol = db.collection('post')
+    userCol.insertOne(obj, (err, result) => {
+      if (err) {
+        console.log(err)
+        res.send(404)
+        return
+      }
+      if (result) {
+        res.send(200)
+        return
+      }
+      res.send(404)
+    })
   })
-  res.send(200)
+  // res.send(200)
 });
 
 module.exports = router
