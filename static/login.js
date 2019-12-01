@@ -28,7 +28,7 @@ async function checkLogin(url = '', data = {}) {
 }
 
 //Event: add a post
-document.querySelector('#user-form').addEventListener('submit',(e)=>{
+document.querySelector('#login-form').addEventListener('submit',(e)=>{
     //prevent actual submit
     e.preventDefault();
 // Get form values
