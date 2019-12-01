@@ -8,8 +8,8 @@ class NewsItem{
     }
 }
 let token;
-let username='ahmr';
-let password= 'amirhossein';
+let username='houssam966';
+let password= 'ILAlgeria';
 
 fetch('user/signIn', {
     method: 'POST', // *GET, POST, PUT, DELETE, etc.
@@ -133,7 +133,10 @@ function makePost(tags, newDescription, newAuthor,id){
     
  }
  function upVoteFunction(upVoteButton){
-     const id = upVoteButton.parentElement.parentElement.parentElement.getAttribute('data-id');
+     console.log("up pressed");
+     const id = upVoteButton.parentElement.parentElement.parentElement.parentElement.getAttribute('data-id');
+    // console.log(upVoteButton.parentElement.parentElement.parentElement.parentElement.getAttribute('data-id'));
+    
     // //update upvote of post in database
      fetch(`post/upVote?id=${id}`, {
         headers: {
@@ -143,7 +146,8 @@ function makePost(tags, newDescription, newAuthor,id){
  }
 
  function downVoteFunction(downVoteButton){
-    const id = downVoteButton.parentElement.getAttribute('data-id');
+
+    const id = downVoteButton.parentElement.parentElement.parentElement.parentElement.getAttribute('data-id');
     fetch(`post/downVote?id=${id}`, {
         headers: {
             'x-access-token': token
