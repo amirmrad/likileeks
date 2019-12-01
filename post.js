@@ -24,11 +24,11 @@ const con = (dburl, callback) => {
 router.get('/posts', (req, res) => {
   const username = req.query.username
   const p = req.query.page
-  const page = p ? p : 0
+  //const page = p ? p : 0
   const option = username ? {author: username} : {}
   con(dburl, (db) => {
     const postCol = db.collection('post')
-    postCol.find(option, {projection: {_id: 0}}).skip(p * 10).limit(10).toArray((err, result) => {
+    postCol.find(option, {projection: {_id: 0}}).toArray((err, result) => {
       if (err) {
         console.log(err)
         res.send(404)
