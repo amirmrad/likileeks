@@ -1,10 +1,5 @@
 
- function downVoteFunction(downVoteButton){
-    const id = downVoteButton.parentElement.getAttribute('data-id');
-    //
-    fetch(`post/downVote?id=${id}`);
-    updateCP(id);
- }
+
 
 function updateCP(id){
 

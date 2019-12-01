@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie+edge" />
+    <title>LikiLeeks</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <link type="text/css" href="/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <nav>
+      <div class="nav-wrapper indigo darken-4">
+        <a href="#" class="brand-logo center">Logo</a>
+        <ul>
+          <li>
+            <form>
+              <div>
+                <div class="input-field">
+                  <input id="search" type="search" required />
+                  <label for="search"
+                    ><i class="material-icons">search</i></label
+                  >
+                  <i class="material-icons">close</i>
+                </div>
+              </div>
+            </form>
+          </li>
+          <li>
+            <a
+              id="menuItem"
+              class="dropdown-trigger btn indigo accent-1"
+              href="#"
+              data-target="dropdown1"
+              >Menu</a
+            >
+          </li>
+        </ul>
+
+        <!-- Dropdown Trigger -->
+
+        <ul id="dropdown1" class="dropdown-content indigo darken-4">
+          <li>
+            <a href="#!"
+              ><i class="material-icons" style="color:#8c9eff;">home</i>
+              <p style="color:rgb(255, 255, 255);">Home</p></a
+            >
+          </li>
+          <li class="divider" tabindex="-1"></li>
+          <li>
+            <a href="#!"
+              ><i class="material-icons" style="color:#8c9eff;">view_module</i>
+              <p style="color:rgb(255, 255, 255);">News</p>
+            </a>
+          </li>
+          <li class="divider" tabindex="-1"></li>
+          <li>
+            <a href="#!"
+              ><i class="material-icons" style="color:#8c9eff" ;
+                >phone_iphone</i
+              >
+              <p style="color:rgb(255, 255, 255);">Contact</p></a
+            >
+          </li>
+          <li class="divider" tabindex="-1"></li>
+          <li>
+            <a href="#!"
+              ><i class="material-icons" style="color:#8c9eff;">cloud</i>
+              <p style="color:rgb(255, 255, 255);">About</p></a
+            >
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="row" id="container2">
+      <div class="postsContainer">
+        <div class="row" class="smallCard">
+          <div class="col s12 m5">
+            <div class="card-panel teal">
+              <span class="white-text"> </span>
+              <div>
+                <div class="single-blog">
+                  <h4 id="tags">#Tag</h4>
+                  <div class="newsImage" style="height:100px;">Image</div>
+                  <p id="description">description</p>
+                  <p id="author">author</p>
+                  <div class="btn">
+                    <button
+                      type="button"
+                      class="upvote indigo darken-4"
+                      onclick="upVoteFunction(this)"
+                    >
+                      UpVote
+                    </button>
+                    <button
+                      type="button"
+                      class="downVote indigo darken-4"
+                      onclick="downVoteFunction(this)"
+                    >
+                      DownVote
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="mat.js"></script>
+    <!-- <script src="index.js"></script> -->
+    <script src="credibility.js"></script>
+    <script>
+      function displayNewsItems(newsArray) {
+        newsArray.forEach(element => {
+          makePost(
+            element.tags,
+            element.description,
+            element.author,
+            element.id
+          );
+        });
+      }
+      function makePost(tags, newDescription, newAuthor, id) {
+        const post = document.createElement("div");
+        const singleBlog = document.createElement("div");
+        const tagsHeader = document.createElement("h2");
+        const newsImage = document.createElement("div");
+        const description = document.createElement("p");
+        const author = document.createElement("p");
+        const btnHolder = document.createElement("div");
+        const upVoteButton = document.createElement("button");
+        const downVoteButton = document.createElement("button");
+
+        post.setAttribute("class", "post");
+        post.setAttribute("data-id", id);
+        singleBlog.setAttribute("class", "single-blog");
+
+        tagsHeader.setAttribute("id", "title");
+        tagsHeader.innerHTML = "#" + tags;
+
+        newsImage.setAttribute("class", "newsImage");
+        newsImage.setAttribute("style", "height:200px;");
+        newsImage.innerHTML = "Image";
+
+        description.setAttribute("id", "description");
+        description.innerHTML = newDescription;
+
+        author.setAttribute("id", "author");
+        author.innerHTML = newAuthor;
+        btnHolder.setAttribute("class", "btn");
+
+        upVoteButton.setAttribute("onclick", "upVoteFunction(this)");
+        upVoteButton.innerHTML = "Up Vote";
+        downVoteButton.innerHTML = "Down Vote";
+        downVoteButton.setAttribute("onclick", "downVoteFunction(this)");
+
+        btnHolder.appendChild(upVoteButton);
+        btnHolder.appendChild(downVoteButton);
+
+        singleBlog.appendChild(tagsHeader);
+        singleBlog.appendChild(newsImage);
+        singleBlog.appendChild(description);
+        singleBlog.appendChild(author);
+        singleBlog.appendChild(btnHolder);
+        post.appendChild(singleBlog);
+
+        document.querySelector(".postsContainer").appendChild(post);
+        //console.log(tags);
+      }
+      const urlParams = new URLSearchParams(window.location.search);
+      const myParam = urlParams.get("author");
+
+      fetch(`post/posts?username=${myParam}`)
+        .then(r => r.json())
+        .then(arr => displayNewsItems(arr))
+        .catch(err => console.error(err));
+    </script>
+  </body>
+</html>
