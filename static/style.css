@@ -108,3 +108,14 @@ flex-direction: column;
 #card{
   margin: 0 !important;
 }
+.smallCard{
+  width:600px;
+  height: 200px;
+}
+
+#up{
+  color: #f3f3f3;
+}
+#down{
+  color: #f3f3f3;
+}
