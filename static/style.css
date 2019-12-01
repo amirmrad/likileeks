@@ -113,9 +113,9 @@ flex-direction: column;
   height: 200px;
 }
 
-#up{
+.up{
   color: #f3f3f3;
 }
-#down{
+.down{
   color: #f3f3f3;
 }

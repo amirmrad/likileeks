@@ -68,57 +68,65 @@ function displayNewsItems(newsArray){
 }
 function makePost(tags, newDescription, newAuthor,id){
     const post = document.createElement('div');
-    const singleBlog = document.createElement('div');
-    const tagsHeader = document.createElement('p');
-    for(x=0;x<tags.length;x++){
-        const tag = document.createElement('a');
-        tag.setAttribute("href","http://localhost:3000/");
-        tag.innerHTML = "#" + tags[x];
-        tagsHeader.appendChild(tag);
-    }
-
-    const newsImage = document.createElement('div');
-    const description = document.createElement('p');
-    const author = document.createElement('a');
-    const btnHolder = document.createElement('div');
-    const upVoteButton = document.createElement('button');
-    const downVoteButton = document.createElement('button');
+    post.setAttribute('class', 'card-panel grey lighten-5 z-depth-1 smallCard col s12 m8 offset-m2 l6 offset-l3 post');
+    post.setAttribute("data-id",id);
+        const lineWrapper = document.createElement('div');
+        lineWrapper.setAttribute('class','row valign-wrapper');
+            const div1 = document.createElement('div');
+                const image1 = document.createElement('img');
+                image1.setAttribute('class','circle responsive-img');
+                image1.setAttribute('src','images/yuna.jpg');
+                image1.setAttribute('alt',' ');
+               // div1.appendChild(image1);
 
 
-    post.setAttribute('class', 'post');
-    post.setAttribute("data-id",id)
-    singleBlog.setAttribute('class', 'single-blog');
+            const singleBlog = document.createElement('div');
+            singleBlog.setAttribute("class","single-blog");
 
-    tagsHeader.setAttribute('id', 'title');
-    
+                const tagsHeader = document.createElement('p');
+                tagsHeader.setAttribute('id', 'title');
+                for(x=0;x<tags.length;x++){
+                    const tag = document.createElement('a');
+                    tag.setAttribute("href","http://localhost:3000/");
+                    tag.innerHTML = "#" + tags[x];
+                    tagsHeader.appendChild(tag);
+                }
 
+                const description = document.createElement('p');
+                description.setAttribute('id', 'description');
+                description.innerHTML = newDescription;
 
-    newsImage.setAttribute('class','newsImage');
-    newsImage.setAttribute('style','height:200px;');
-    newsImage.innerHTML = "Image";
+                const authordiv = document.createElement('div');
+                    const author = document.createElement('a');
+                    author.setAttribute('id', 'author');
+                    author.setAttribute("href",`http://localhost:3000/user.html?author=${newAuthor}`);
+                    author.innerHTML = newAuthor;
+                authordiv.appendChild(author)
 
-    description.setAttribute('id', 'description');
-    description.innerHTML = newDescription;
+                const btnHolder = document.createElement('div');
+                btnHolder.setAttribute("class","btn indigo darken-4");
+                    const upVoteButton = document.createElement('i');
+                    const downVoteButton = document.createElement('i');
+                    upVoteButton.setAttribute("onclick","upVoteFunction(this)");
+                    upVoteButton.setAttribute("class","material-icons right indigo darken-4");
+                    upVoteButton.innerHTML = "thumb_up";
 
-    author.setAttribute('id', 'author');
-    author.setAttribute("href",`http://localhost:3000/user.html?author=${newAuthor}`);
-    author.innerHTML = newAuthor;
-    btnHolder.setAttribute('class', 'btn');
+                    
+                    downVoteButton.setAttribute("onclick","downVoteFunction(this)");
+                    downVoteButton.setAttribute("class","material-icons right indigo darken-4");
+                    downVoteButton.innerHTML = "thumb_down";
+                btnHolder.appendChild(upVoteButton);
+                btnHolder.appendChild(downVoteButton);
 
-    upVoteButton.setAttribute("onclick","upVoteFunction(this)");
-    upVoteButton.innerHTML = "Up Vote";
-    downVoteButton.innerHTML = "Down Vote";
-    downVoteButton.setAttribute("onclick","downVoteFunction(this)");
+            singleBlog.appendChild(tagsHeader);
+            singleBlog.appendChild(description);
+            singleBlog.appendChild(authordiv);
+            singleBlog.appendChild(btnHolder);
 
-    btnHolder.appendChild(upVoteButton);
-    btnHolder.appendChild(downVoteButton);
+        lineWrapper.appendChild(div1);
+        lineWrapper.appendChild(singleBlog);
 
-    singleBlog.appendChild(tagsHeader);
-    singleBlog.appendChild(newsImage);
-    singleBlog.appendChild(description);
-    singleBlog.appendChild(author);
-    singleBlog.appendChild(btnHolder);
-    post.appendChild(singleBlog);
+    post.appendChild(lineWrapper);
 
     document.querySelector(".postsContainer").appendChild(post);
     //console.log(tags);
