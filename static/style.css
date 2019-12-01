@@ -97,3 +97,14 @@ label.active {
   text: rgb(248, 248, 248) !important;
 }
 
+#container2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+flex-direction: column;
+  }
+
+#card{
+  margin: 0 !important;
+}

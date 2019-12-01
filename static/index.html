@@ -13,26 +13,28 @@
 
     </head>
   <body>
-      <nav>
-          <div class="nav-wrapper indigo darken-4">
-            <a href="#" class="brand-logo center">Logo</a>
-            <ul>
-                <li>
-                <form>
-                    <div class="input-field">
-                      <input id="search" type="search" required>
-                      <label class="label-icon" for="search"><i class="material-icons">search</i></label>
-                      <i class="material-icons">close</i>
-                    </div>
-                  </form>
-                  </li>
-                <li>
-                    <a id='menuItem'class='dropdown-trigger btn indigo accent-1' href='#' data-target='dropdown1'>Menu</a>
-                </li>
-            </ul>
-            
+    <nav>
+    <div class="nav-wrapper indigo darken-4">
+      <a href="#" class="brand-logo center">Logo</a>
+      <ul>
+          <li>
+          <form>
+            <div>
+              <div class="input-field">
+                <input id="search" type="search" required>
+                <label for="search"><i class="material-icons">search</i></label>
+                <i class="material-icons">close</i>
+              </div>
+            </div>
+            </form>
+            </li>
+          <li>
+            <a id='menuItem'class='dropdown-trigger btn indigo accent-1' href='#' data-target='dropdown1'>Menu</a>
+          </li>
+      </ul>
+          
                   
-      <!-- Dropdown Trigger -->
+                              <!-- Dropdown Trigger -->
       
       <ul id='dropdown1' class='dropdown-content indigo darken-4'>
           <li><a href="#!"><i class="material-icons" style="color:#8c9eff;">home</i><p style="color:rgb(255, 255, 255);">Home</p></a></li>
@@ -42,14 +44,15 @@
           <li><a href="#!"><i class="material-icons"style="color:#8c9eff";>phone_iphone</i><p style="color:rgb(255, 255, 255);">Contact</p></a></li><li class="divider" tabindex="-1"></li>
           <li><a href="#!"><i class="material-icons"style="color:#8c9eff;">cloud</i><p style="color:rgb(255, 255, 255);">About</p></a></li>
         </ul>
-          </div>
-        </nav>
+     </div>
+   </nav>
 
 
 
-  <div class="row">
-      <div class="col s12 m6 offset-m3 ">
-        <div id='card' class="card-panel teal5 indigo accent-1">
+  <div  class="row" id="container2">
+      <div id='card' class="col s12 m6">
+        <div  class="card-panel teal5 indigo accent-1">
+            <div class="row valign-wrapper"></div>
           <span>
               <div id='centerContainer' class="row">
                   <div class="inputContainer">
@@ -64,9 +67,9 @@
                             <i class="material-icons prefix" style="color:#1a237e;">account_circle</i>
                             <input id="author" type="text" class="validate">
                             <label for="author" data-error="Please enter author name">Author Name</label>
-                          </div>
+                        </div>
                       </div>
-                      </div>
+                    
                       <!--new Row for the new description-->
                       <div class="row">
                           <div class="input-field col s12">
@@ -82,54 +85,38 @@
                         </div>
                     </form>
                   </div>
+                </div>
           </span>
         </div>
+        </div>
+        <div class="postsContainer">
+            <div class="row" class ='smallCard'>
+                <div class="col s12 m5">
+                  <div class="card-panel teal">
+                    <span class="white-text">
+        
+                    </span>
+                    <div>
+                        <div class="single-blog">
+                            <h4 id="tags">#Tag</h4>
+                            <div class="newsImage" style="height:100px;">Image</div>
+                            <p id= "description">description</p>
+                            <p id= "author">author</p>
+                            <div class= "btn">  
+                                 <button type="button" class = "upvote indigo darken-4" onclick="upVoteFunction(this)"> UpVote</button>
+                                 <button type="button" class = "downVote indigo darken-4" onclick= "downVoteFunction(this)"> DownVote</button>
+                            </div>
+                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      </div>
       </div>
     </div>
-          <div class="postsContainer">
-             
-            <div class="post" data-id = "1">
-                  <div class="single-blog">
-                       <h2 id="tags">#Tag</h2>
-                       <div class="newsImage" style="height:200px;">Image</div>
-                       <p id= "description">description</p>
-                       <p id= "author">author</p>
-                       <div class= "btn">  
-                            <button type="button" class = "upvote" onclick="upVoteFunction(this)"> UpVote</button>
-                            <button type="button" class = "downVote" onclick= "downVoteFunction(this)"> DownVote</button>
-                       </div>
-                  </div>
-             </div>
+         
+    
 
-
-          </div>
-      </div>
-
-    <!-- <div class="main">
-        <form id="post-form">
-            <div class="form-group">
-                <label for="title">Title</label>
-                <input type="text" id ="title" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="author">Author</label>
-                <input type="text" id ="author" class="form-control">
-            </div>
-            <div class="form-group">
-                <label for="description">Description</label>
-                <input type="text" id ="description" class="form-control">
-            </div>
-            <input type="submit" value="Post" class="btn btn-primary btn-block">
-        </form>
-      <div class="postsContainer">
-        <div class="card" data-id="">
-            <button onclick="upVoteFunction(this)">Upvote</button>
-          <p>
-            This is a card
-          </p>
-        </div>
-      </div>
-    </div> -->
 
 
        <!-- Compiled and minified JavaScript -->
