@@ -59,7 +59,7 @@ function displayNewsItems(newsArray){
     });
     
 }
-function makePost(tags, newDescription, newAuthor){
+function makePost(tags, newDescription, newAuthor,id){
     const post = document.createElement('div');
     const singleBlog = document.createElement('div');
     const tagsHeader = document.createElement('h2');
@@ -72,6 +72,7 @@ function makePost(tags, newDescription, newAuthor){
 
 
     post.setAttribute('class', 'post');
+    post.setAttribute("data-id",id)
     singleBlog.setAttribute('class', 'single-blog');
 
     tagsHeader.setAttribute('id', 'title');
@@ -88,8 +89,11 @@ function makePost(tags, newDescription, newAuthor){
     author.innerHTML = newAuthor;
     btnHolder.setAttribute('class', 'btn');
 
+    upVoteButton.setAttribute("onclick","upVoteFunction(this)");
     upVoteButton.innerHTML = "Up Vote";
     downVoteButton.innerHTML = "Down Vote";
+    downVoteButton.setAttribute("onclick","downVoteFunction(this)");
+    
     btnHolder.appendChild(upVoteButton);
     btnHolder.appendChild(downVoteButton);
 
@@ -99,7 +103,7 @@ function makePost(tags, newDescription, newAuthor){
     singleBlog.appendChild(author);
     singleBlog.appendChild(btnHolder);
     post.appendChild(singleBlog);
-    
+
     document.querySelector(".postsContainer").appendChild(post);
     console.log(tags);
     
@@ -128,7 +132,7 @@ document.querySelector('#post-form').addEventListener('submit',(e)=>{
         //give data to backend
         //postData('/newPost',newsItem);
         //add it to ui by getting it from backend again
-        makePost(tags,description,author);
+        makePost(tags,description,author,id);
         //getNewsItems();
     }
 
