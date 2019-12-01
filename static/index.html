@@ -15,25 +15,25 @@
   <body>
     <nav>
     <div class="nav-wrapper indigo darken-4">
-      <a href="#" class="brand-logo center">Logo</a>
+      <a href="#" class="brand-logo center">LikiLeaks</a>
       <ul>
-          <li>
           <form>
             <div>
-              <div class="input-field">
-                <input id="search" type="search" required>
-                <label for="search"><i class="material-icons">search</i></label>
-                <i class="material-icons">close</i>
+                <!-- <li>
+                    <a id='menuItem'class='dropdown-trigger btn indigo accent-1' href='#' data-target='dropdown1'>Menu</a>
+                </li> -->
               </div>
-            </div>
-            </form>
-            </li>
-          <li>
-            <a id='menuItem'class='dropdown-trigger btn indigo accent-1' href='#' data-target='dropdown1'>Menu</a>
-          </li>
+          </form>
       </ul>
-          
-                  
+      
+          <div class="input-field" style="position: absolute; right : 0; top : 25%; height : 30px">
+             <input id="search" type="search" required>
+             <!-- <label id="searchIcon" for="search"><i class="material-icons">search</i></label> -->
+             <!-- <i class="material-icons">close</i> -->
+           </div>
+         
+       
+                            
                               <!-- Dropdown Trigger -->
       
       <ul id='dropdown1' class='dropdown-content indigo darken-4'>
@@ -41,13 +41,80 @@
           <li class="divider" tabindex="-1"></li>
           <li><a href="#!"><i class="material-icons"style="color:#8c9eff;">view_module</i><p style="color:rgb(255, 255, 255);">News</p> </a></li>
           <li class="divider" tabindex="-1"></li>
-          <li><a href="#!"><i class="material-icons"style="color:#8c9eff";>phone_iphone</i><p style="color:rgb(255, 255, 255);">Contact</p></a></li><li class="divider" tabindex="-1"></li>
+          <li><a href="#!"><i class="material-icons"style="color:#8c9eff";>phone_iphone</i><p style="color:rgb(255, 255, 255);">Contact Us</p></a></li><li class="divider" tabindex="-1"></li>
           <li><a href="#!"><i class="material-icons"style="color:#8c9eff;">cloud</i><p style="color:rgb(255, 255, 255);">About</p></a></li>
         </ul>
      </div>
    </nav>
 
 
+
+   <head>
+   <style>
+   body {
+     margin: 0;
+   }
+   
+   ul {
+     list-style-type: none;
+     margin: 0;
+     padding: 0;
+     width: 25%;
+     background-color: #1a237e;
+     position: fixed;
+     height: 100%;
+     overflow: auto;
+   }
+   
+   li a {
+     display: block;
+     color: #ffffff;
+     padding: 8px 16px;
+     text-decoration: none;
+   }
+   
+   li a.active {
+     background-color: #8c9eff;
+     color: white;
+   }
+   
+   li a:hover:not(.active) {
+     background-color: #c5cae9;
+     color: white;
+   }
+   </style>
+   </head>
+   <body>
+   
+   <ul>
+     <li><a class="active" href="#home">Home</a></li>
+     <li><a href="#news">News</a></li>
+     <li><a href="#contact">Contact Us</a></li>
+     <li><a href="#about">About</a></li>
+   </ul>
+   
+   </body>
+
+
+   
+
+   <!-- <div class="row indigo darken-4" id=sideBar>
+      <div class="container ">
+          <ul id="slide-out" class="side-nav">
+              <li><div class="user-view">
+                <div class="background"></div>
+              </div>
+              </div></li>
+              
+              <li><a class="waves-effect" href="#!"><i class="material-icons">code</i>HTML5</a></li>
+              <li><a class="waves-effect" href="#!"><i class="material-icons">flare</i>CSS3</a></li>
+              <li><a class="waves-effect" href="#!"><i class="material-icons">desktop_mac</i>Bootstrap 3</a></li>
+              <li><a class="waves-effect" href="#!"><i class="material-icons">laptop_mac</i>Bootstrap 4</a></li>
+              <li><a class="waves-effect" href="#!"><i class="material-icons">dvr</i>Materialize CSS</a></li>
+          </ul>
+      </div>
+  </div> -->
+      
 
   <div  class="row" id="container2">
       <div id='card' class="col s12 m6">

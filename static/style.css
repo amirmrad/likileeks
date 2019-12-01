@@ -31,7 +31,12 @@
     float: left;
   }
   
-
+#sideBar{
+  width: 200px;
+  margin-left: 0px;
+  margin-top: 0px;
+  height:100%;
+}
 
 
   #top a {
@@ -119,3 +124,9 @@ flex-direction: column;
 #down{
   color: #f3f3f3;
 }
+
+#search {
+/* position : absolute; right : 5%; */
+
+margin-right: 25%;
+} 
