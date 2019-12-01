@@ -1,8 +1,11 @@
 const express = require('express');
 const mongo = require('mongodb').MongoClient;
-const dburl = 'mongodb://user:likileaks@localhost:27017/likileaks';
-const router = express.Router()
-const _ = require('lodash')
+const router = express.Router();
+const _ = require('lodash');
+const dotenv = require('dotenv');
+dotenv.config();
+
+const dburl = process.env.DB_URL;
 
 
 router.post('/createUser', (req, res) => {
@@ -39,7 +42,7 @@ router.get('/getUser', (req, res) => {
     }
     const db = client.db('likileaks')
     const userCol = db.collection('user')
-    userCol.findOne({username : username}, (err, result) => {
+    userCol.findOne({username : username},{projection: {password: false}}, (err, result) => {
       if (err) {
         console.log(err)
         res.send(404);
