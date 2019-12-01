@@ -32,11 +32,7 @@ const updateCred = (author, increase) => {
 router.get('/posts', (req, res) => {
   const username = req.query.username
   const p = req.query.page
-<<<<<<< HEAD
-  //const page = p ? p : 0
-=======
   // const page = p ? p : 0
->>>>>>> 9d640fccb298e5ea44f46afe72442223ad1f61f4
   const option = username ? {author: username} : {}
   con(dburl, (db) => {
     const postCol = db.collection('post')

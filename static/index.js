@@ -101,7 +101,7 @@ function makePost(tags, newDescription, newAuthor,id){
     description.innerHTML = newDescription;
 
     author.setAttribute('id', 'author');
-    author.setAttribute("href","http://localhost:3000/");
+    author.setAttribute("href",`http://localhost:3000/user.html?author=${newAuthor}`);
     author.innerHTML = newAuthor;
     btnHolder.setAttribute('class', 'btn');
 
