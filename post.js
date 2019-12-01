@@ -2,6 +2,7 @@ const express = require('express');
 const mongo = require('mongodb').MongoClient;
 const router = express.Router()
 const dotenv = require('dotenv');
+const auth = require('./auth');
 dotenv.config();
 
 const dburl = process.env.DB_URL;
@@ -77,7 +78,7 @@ router.get('/upVote', (req, res) => {
   })
 })
 
-router.post('/newPost', (req, res) => {
+router.post('/newPost', auth, (req, res) => {
   const obj = req.body
   obj.upVote = 0.0;
   obj.downVote = 0.0;

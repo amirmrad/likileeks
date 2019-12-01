@@ -1,11 +1,43 @@
 const express = require('express');
 const mongo = require('mongodb').MongoClient;
 const router = express.Router();
+const jwt = require('jsonwebtoken')
 const _ = require('lodash');
 const dotenv = require('dotenv');
 dotenv.config();
 
 const dburl = process.env.DB_URL;
+
+router.post('/signIn', (req, res) => {
+  const user = req.body;
+  mongo.connect(dburl, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    }, (err, client) => {
+    if (err) {
+      console.error(err)
+      return
+    }
+      const db = client.db('likileaks')
+      const userCol = db.collection('user')
+      userCol.findOne({username: user.username},{projection: {_id: 0, password: 1}}, (err, result) => {
+        if (err) {
+          console.log(err)
+        }
+        if (result) {
+          if (user.password === result.password) {
+            // generate token
+            const token = jwt.sign({username: user.username}, process.env.myprivatekey)
+            res.header("x-auth-token", token).json({message: "success"})
+            return
+          }
+          res.send(401)
+          return
+        }
+        res.send(404)
+      })
+  })
+})
 
 router.post('/createUser', (req, res) => {
   const obj = req.body;
