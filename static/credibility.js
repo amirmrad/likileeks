@@ -1,12 +1,4 @@
-function upVoteFunction(upVoteButton){
-    console.log("up prezsed");
-     const id = upVoteButton.parentElement.parentElement.parentElement.getAttribute('data-id');
-     console.log(id);
-    // //update upvote of post in database
-     fetch(`post/upVote?id=${id}`);
-    // //--------------------
-    // updateCP(id);
- }
+
  function downVoteFunction(downVoteButton){
     const id = downVoteButton.parentElement.getAttribute('data-id');
     //

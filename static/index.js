@@ -64,11 +64,9 @@ function makeid(length) {
   }
 
 function displayNewsItems(newsArray){
-
     newsArray.forEach(element => {
         makePost(element.tags,element.description,element.author,element.id);
     });
-    
 }
 function makePost(tags, newDescription, newAuthor,id){
     const post = document.createElement('div');
@@ -119,6 +117,20 @@ function makePost(tags, newDescription, newAuthor,id){
     //console.log(tags);
     
  }
+ function upVoteFunction(upVoteButton){
+    console.log("up prezsed");
+     const id = upVoteButton.parentElement.parentElement.parentElement.getAttribute('data-id');
+     console.log(id);
+    // //update upvote of post in database
+     fetch(`post/upVote?id=${id}`, {
+        headers: {
+            'x-access-token': token
+          }
+     });
+    // //--------------------
+    // updateCP(id);
+ }
+
 //Event: add a post
 document.querySelector('#post-form').addEventListener('submit',(e)=>{
 
