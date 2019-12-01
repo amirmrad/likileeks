@@ -21,6 +21,14 @@ const con = (dburl, callback) => {
   })
 }
 
+const updateCred = (author, increase) => {
+  con(dburl, (db) => {
+    const userCol = db.collection('user') 
+    userCol.update({username: author}, {$inc: {"credibility": increase ? 1 : -1}})
+  })
+}
+
+
 router.get('/posts', (req, res) => {
   const username = req.query.username
   const p = req.query.page
@@ -43,13 +51,14 @@ router.get('/downVote', auth, (req, res) => {
   // update table
   const id = req.query.id;
   con(dburl, (db) => {
-    const userCol = db.collection('post')
-    userCol.update({id : id}, {$inc : {downVote : 1}}, (err, result) => {
+    const postCol = db.collection('post')
+    postCol.findOneAndUpdate({id : id}, {$inc : {downVote : 1}}, (err, result) => {
       if (err) {
         console.log(err);
         res.send(404);
       } else {
         if (result) {
+          updateCred(result.value.author, false)
           res.json({message : "success"})
           return
         }
@@ -62,13 +71,14 @@ router.get('/downVote', auth, (req, res) => {
 router.get('/upVote', auth, (req, res) => {
   const id = req.query.id;
   con(dburl, (db) => {
-    const userCol = db.collection('post')
-    userCol.update({id : id}, {$inc : {upVote : 1}}, (err, result) => {
+    const postCol = db.collection('post')
+    postCol.findOneAndUpdate({id : id}, {$inc : {upVote : 1}}, (err, result) => {
       if (err) {
         console.log(err);
         res.send(404);
       } else {
         if (result) {
+          updateCred(result.value.author, true)
           res.json({message : "success"})
           return
         }
