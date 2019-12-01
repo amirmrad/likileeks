@@ -8,6 +8,24 @@ class NewsItem{
         this.id = id;
     }
 }
+let token;
+
+
+fetch('user/signIn', {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    redirect: 'follow', // manual, *follow, error
+    referrer: 'no-referrer', // no-referrer, *client
+    body: JSON.stringify({username: 'ahmr', password: 'amirhossein'}) // body data type must match "Content-Type" header
+  }).then(res => token = res.headers.get('x-auth-token'))
+
+
 
 function makeid(length) {
     var result = '';
@@ -21,43 +39,34 @@ function makeid(length) {
 
  async function postData(url = '', data = {}) {
     // Default options are marked with *
-    await fetch(url, {
+    let res = await fetch(url, {
       method: 'POST', // *GET, POST, PUT, DELETE, etc.
       mode: 'cors', // no-cors, *cors, same-origin
       cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
       credentials: 'same-origin', // include, *same-origin, omit
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'x-access-token': token
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       redirect: 'follow', // manual, *follow, error
       referrer: 'no-referrer', // no-referrer, *client
       body: JSON.stringify(data) // body data type must match "Content-Type" header
-    })
+    });
+    console.log(res);
+    console.log(data);
   }
 
   document.addEventListener('DOMContentLoaded',getNewsItems())
   
-  function getNewsItems(){
-    fetch('/posts').then(res => res.json()).then(r => displayNewsItems(r));
+  function getNewsItems(){  
+    fetch('/post/posts').then(res => res.json()).then(r => displayNewsItems(r));
   }
 
-
-
 function displayNewsItems(newsArray){
-    console.log("ASdsafasfasfas");
-    const postContainer = document.querySelector(".postsContainer");
     newsArray.forEach(element => {
-    // titleText = document.createTextNode(element.title);
-    // descText = document.createTextNode(element.description);
-    // authorText = document.createTextNode(element.author);
-    makePost(element.title,element.description,element.author);
-    // linebreak = document.createElement('br');
-    // postContainer.appendChild(titleText);
-    // postContainer.appendChild(descText);
-    // postContainer.appendChild(authorText);
+        makePost(element.tags,element.description,element.author,element.id);
     });
-    
 }
 function makePost(tags, newDescription, newAuthor,id){
     const post = document.createElement('div');
@@ -93,7 +102,7 @@ function makePost(tags, newDescription, newAuthor,id){
     upVoteButton.innerHTML = "Up Vote";
     downVoteButton.innerHTML = "Down Vote";
     downVoteButton.setAttribute("onclick","downVoteFunction(this)");
-    
+
     btnHolder.appendChild(upVoteButton);
     btnHolder.appendChild(downVoteButton);
 
@@ -105,9 +114,23 @@ function makePost(tags, newDescription, newAuthor,id){
     post.appendChild(singleBlog);
 
     document.querySelector(".postsContainer").appendChild(post);
-    console.log(tags);
+    //console.log(tags);
     
  }
+ function upVoteFunction(upVoteButton){
+    console.log("up prezsed");
+     const id = upVoteButton.parentElement.parentElement.parentElement.getAttribute('data-id');
+     console.log(id);
+    // //update upvote of post in database
+     fetch(`post/upVote?id=${id}`, {
+        headers: {
+            'x-access-token': token
+          }
+     });
+    // //--------------------
+    // updateCP(id);
+ }
+
 //Event: add a post
 document.querySelector('#post-form').addEventListener('submit',(e)=>{
 
@@ -119,9 +142,6 @@ document.querySelector('#post-form').addEventListener('submit',(e)=>{
     const description = document.querySelector('#description').value;
     const id = makeid(15);
 
-    //card = document.querySelector('.card');
-    //card.setAttribute('data-id',id);
-
     //validate 
     if(tags === '' || author ==='' || description === ''){
         alert('Please fill in all the blanks');
@@ -130,10 +150,15 @@ document.querySelector('#post-form').addEventListener('submit',(e)=>{
         //instantiate book
         const newsItem = new NewsItem(tags,author,description,id);
         //give data to backend
-        //postData('/newPost',newsItem);
+
+        postData('post/newPost',newsItem);
+        //clear post container
+        const postsContainer = document.querySelector(".postsContainer");
+        while (postsContainer.firstChild) {
+            postsContainer.removeChild(postsContainer.firstChild);
+          }
         //add it to ui by getting it from backend again
-        makePost(tags,description,author,id);
-        //getNewsItems();
+        getNewsItems();
     }
 
 });
