@@ -143,6 +143,17 @@ function makePost(tags, newDescription, newAuthor,id){
      });
  }
 
+const search = document.querySelector('#search');
+const searchBtn = document.querySelector('#searchBtn')
+searchBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  fetch('post/posts').then(r => r.json()).then(arr => {
+      const newArr = arr.filter(x => x.tags.includes(search.value));
+    console.log(newArr)
+      clearPosts();
+      displayNewsItems(newArr);
+  })
+})
 
 //Event: add a post
 document.querySelector('#post-form').addEventListener('submit',(e)=>{
@@ -175,3 +186,11 @@ document.querySelector('#post-form').addEventListener('submit',(e)=>{
     }
 
 });
+
+function clearPosts() {
+        const postsContainer = document.querySelector(".postsContainer");
+        while (postsContainer.firstChild) {
+            postsContainer.removeChild(postsContainer.firstChild);
+          }
+
+}
