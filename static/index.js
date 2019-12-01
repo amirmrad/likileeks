@@ -160,7 +160,13 @@ const searchBtn = document.querySelector('#searchBtn')
 searchBtn.addEventListener('click', (e) => {
   e.preventDefault();
   fetch('post/posts').then(r => r.json()).then(arr => {
-      const newArr = arr.filter(x => x.tags.includes(search.value));
+      const newArr = arr.filter(x => {
+        if (search.value != '') {
+          return x.tags.includes(search.value)
+        } else {
+          return true
+        }
+      });
     console.log(newArr)
       clearPosts();
       displayNewsItems(newArr);
