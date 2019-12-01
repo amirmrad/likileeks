@@ -39,7 +39,7 @@ router.get('/posts', (req, res) => {
   })
 })
 
-router.get('/downVote', (req, res) => {
+router.get('/downVote', auth, (req, res) => {
   // update table
   const id = req.query.id;
   con(dburl, (db) => {
@@ -59,7 +59,7 @@ router.get('/downVote', (req, res) => {
   })
 })
 
-router.get('/upVote', (req, res) => {
+router.get('/upVote', auth, (req, res) => {
   const id = req.query.id;
   con(dburl, (db) => {
     const userCol = db.collection('post')
